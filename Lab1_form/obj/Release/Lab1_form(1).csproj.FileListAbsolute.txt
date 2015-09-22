@@ -1,0 +1,8 @@
+C:\Users\Ivan\YandexDisk-papasmail\KPI\3K_Isemester\GKS\labs\lab1\form\Lab1_form(1)\Lab1_form(1)\bin\Release\Lab1_form(1).exe.config
+C:\Users\Ivan\YandexDisk-papasmail\KPI\3K_Isemester\GKS\labs\lab1\form\Lab1_form(1)\Lab1_form(1)\bin\Release\Lab1_form(1).exe
+C:\Users\Ivan\YandexDisk-papasmail\KPI\3K_Isemester\GKS\labs\lab1\form\Lab1_form(1)\Lab1_form(1)\bin\Release\Lab1_form(1).pdb
+C:\Users\Ivan\YandexDisk-papasmail\KPI\3K_Isemester\GKS\labs\lab1\form\Lab1_form(1)\Lab1_form(1)\obj\Release\Lab1_form_1_.Form1.resources
+C:\Users\Ivan\YandexDisk-papasmail\KPI\3K_Isemester\GKS\labs\lab1\form\Lab1_form(1)\Lab1_form(1)\obj\Release\Lab1_form_1_.Properties.Resources.resources
+C:\Users\Ivan\YandexDisk-papasmail\KPI\3K_Isemester\GKS\labs\lab1\form\Lab1_form(1)\Lab1_form(1)\obj\Release\Lab1_form(1).csproj.GenerateResource.Cache
+C:\Users\Ivan\YandexDisk-papasmail\KPI\3K_Isemester\GKS\labs\lab1\form\Lab1_form(1)\Lab1_form(1)\obj\Release\Lab1_form(1).exe
+C:\Users\Ivan\YandexDisk-papasmail\KPI\3K_Isemester\GKS\labs\lab1\form\Lab1_form(1)\Lab1_form(1)\obj\Release\Lab1_form(1).pdb
