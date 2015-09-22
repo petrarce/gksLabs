@@ -6,3 +6,4 @@ C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\
 C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\prokect.csproj.GenerateResource.Cache
 C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\prokect.exe
 C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\prokect.pdb
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\prokect.csprojResolveAssemblyReference.cache

@@ -11,14 +11,6 @@ namespace ConsoleApplication1
         private Int16 kElem;
         private Int16[][] matrix;
         public List<String[]> operList;
-        /*public List<String[]> OperList
-            { 
-            get {return operList;} 
-            set {
-                getKElem( );
-                getMatrix( );
-            }
-        }*/
         public Int16 KElem { get { return kElem; } }
         public Int16[][] Matrix { get { return matrix; } }
         public List<String[]> OperList { 
@@ -30,7 +22,6 @@ namespace ConsoleApplication1
                 initLabSolver();
             }
         }
-        
         private delegate void CreateNewThread();
         private void getKElem(){
             List<String> tempStr=new List<string>(), tempStrII=new List<string>();

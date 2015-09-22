@@ -102,8 +102,6 @@ namespace ConsoleApplication1
                         if (elementFound( k, i, j, reserved ))
                         {
                             openGroup( i, j, ref reserved );
-               //             groupElIndex=0;
-    //                        while (groupElIndex < Groups[GroupCount].Count)         {
                             for (int l = 0; l < Groups[Groups.Count - 1].Count;l++ )
                             {
                                 e = Groups[Groups.Count - 1][l];
@@ -111,8 +109,6 @@ namespace ConsoleApplication1
                                 searchInRow(k, e, ref reserved);
                             }
 
-  //                              groupElIndex++;
- //                           }
                             groupCount += 1;
                             if (reserved.Count == Matrix.Length)
                                 return;
@@ -139,14 +135,17 @@ namespace ConsoleApplication1
         }
         private Int16 getLastElem (List<Int16> reserved )/*get last element if such was not found*/ 
         {
-            Int16 i;
-            for ( i = 0; i < Matrix.Length; i++)
+            Int16 i,j;
+            for ( i = 0; i < Matrix.Length-1; i++)
             {
+                j = 0;
                 foreach (Int16 e in reserved)
                 {
-                    if (i == e) break;
+                    if (i == e) {
+                        j++;
+                    }
                 }
-                return i;
+                if (j == 0) return i;
             }
             
             return i;
