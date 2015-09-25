@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace ConsoleApplication1
 {
-    class lab1Solver
+    public partial class lab1Solver
     {
         private Int16 kElem;
         private Int16[][] matrix;
@@ -19,15 +19,17 @@ namespace ConsoleApplication1
             } 
             set { 
                 operList = value;
-                initLabSolver();
+                getKElem();
+                getMatrix();
             }
         }
-        private delegate void CreateNewThread();
-        private void getKElem(){
+
+                private Int16 getKElem(List<List<String>> OurString){
             List<String> tempStr=new List<string>(), tempStrII=new List<string>();
             bool CountPlus;
-            kElem=0;
-            foreach(String[] fsString in operList){
+            Int16 kElem=0;
+            foreach (List<String> fsString in OurString)
+            {
                 foreach(String ssString in fsString){
                     try{
                             CountPlus = true;
@@ -52,9 +54,44 @@ namespace ConsoleApplication1
                     }
                 }
             }
-                
+            return kElem;   
         }
-        private void getMatrix(){
+                private Int16 getKElem(List<String[]> OurString){
+            List<String> tempStr=new List<string>(), tempStrII=new List<string>();
+            bool CountPlus;
+            Int16 kElem=0;
+            foreach (String[] fsString in OurString)
+            {
+                foreach(String ssString in fsString){
+                    try{
+                            CountPlus = true;
+                            foreach (String fixStr in tempStr)
+                            {
+                                if (fixStr == ssString)
+                                {
+                                    CountPlus = false;
+                                    break;
+                                }
+                            }
+                            if (CountPlus) {
+                                tempStr.Add(ssString);
+                                kElem += 1;
+                            }
+                        
+                    
+                    }
+                    catch(NullReferenceException){
+                          tempStr.Add(ssString);
+                          kElem += 1;
+                    }
+                }
+            }
+            return kElem;   
+        }
+                internal void getKElem(){
+                    kElem=getKElem(operList);
+                }
+                private void getMatrix(){
             List<String> tempStrList=new List<string>();
             List<String> tempVar=new List<string>();
             resizeMatrix( operList.Count );
@@ -76,20 +113,20 @@ namespace ConsoleApplication1
                     }
                     foreach (String tmp in tempStrList)
                         tempVar.RemoveAll(item => item == tmp);
-                    matrix[j][i] = matrix[i][j]= (Int16)tempVar.Count;
+                    matrix[j][i] = matrix[i][j]= (Int16)(KElem-tempVar.Count);
                     tempVar.Clear();
                     tempStrList.Clear();
                 }
             }
         }
-        private void resizeMatrix (int size ) {
+                private void resizeMatrix (int size ) {
             Array.Resize<Int16[]>( ref matrix, size );
             for (int i = 0; i < size; i++)
             {
-            Array.Resize<Int16>( ref matrix[i], size );
+                Array.Resize<Int16>( ref matrix[i], size );
             }
         }
-        public void outMatrix ( ) {
+                public  void outMatrix ( ) {
         for (int i = 0; i < operList.Count; i++)
             {
             Console.Write( "\n" );
@@ -100,10 +137,5 @@ namespace ConsoleApplication1
             }
         }
 
-
-        public void initLabSolver() {
-            getKElem();
-            getMatrix();
-        }
     }
 }

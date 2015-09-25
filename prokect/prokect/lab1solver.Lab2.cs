@@ -3,14 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
+public class Group {
+    private List<Int16> elements;
+    private List<String> operations;
+
+    public List<Int16> Elements{ get{return elements;} set {elements=value;}}
+    public List<String> Operations{get {return operations;} set {operations=value;}}
+
+    public Group() {
+        elements = new List<Int16>();
+        operations = new List<String>();
+    
+    }
+}
+
 namespace ConsoleApplication1
 {
-    class lab2solver:lab1Solver
+    public partial class lab1Solver
     {
-        private Int16 groupCount;
-        public Int16 GroupCount { get { return groupCount; } }
-        private List<List<Int16>> groups;
-        public List<List<Int16>> Groups { get { return groups; } }
+        //private Int16 groupCount;
+       // public Int16 GroupCount { get { return groupCount; } }
+        private List<Group> groups;
+        public List<Group> Groups { get { return groups; } }
         
         private bool elementFound ( Int16 val, Int16 i, Int16 j, List<Int16> reserved )
         {
@@ -27,7 +42,7 @@ namespace ConsoleApplication1
         }
         private void openGroup ( Int16 i, Int16 j, ref List<Int16> reserved )
         {//open new group
-            Groups.Add( new List<Int16>( ) );
+            Groups.Add( new Group() );
             addElInGroup( i, ref reserved );
             addElInGroup( j, ref reserved );
         }
@@ -85,12 +100,11 @@ namespace ConsoleApplication1
         }
         private void addElInGroup ( Int16 value, ref List<Int16> reserved )
         {
-            Groups[groupCount].Add( value );//add value intp group(!(groupCount) while becomes )
+            Groups[Groups.Count-1].Elements.Add(value);//add value intp group(!(groupCount) while becomes )
             reserved.Add( value );// add value into reserved list (not to take it again)
         }
         public  void createGropus ( )
         {
-  //          Int16 groupElIndex=0;
             Int16 e;
             List<Int16> reserved = new List<Int16>( );
             for (Int16 k = 9; k >= 0; k--)
@@ -102,14 +116,13 @@ namespace ConsoleApplication1
                         if (elementFound( k, i, j, reserved ))
                         {
                             openGroup( i, j, ref reserved );
-                            for (int l = 0; l < Groups[Groups.Count - 1].Count;l++ )
+                            for (int l = 0; l < Groups[Groups.Count - 1].Elements.Count;l++ )
                             {
-                                e = Groups[Groups.Count - 1][l];
+                                e = Groups[Groups.Count - 1].Elements[l];
                                 searchInCol(k, e, ref reserved);
                                 searchInRow(k, e, ref reserved);
                             }
 
-                            groupCount += 1;
                             if (reserved.Count == Matrix.Length)
                                 return;
                         }
@@ -117,21 +130,17 @@ namespace ConsoleApplication1
                 }
             }
             if (reserved.Count == Matrix.Length - 1) {//GroupCount-1 while index of n element ind=n-1
-                Groups[GroupCount-1].Add( getLastElem(reserved) );    
+                Groups.Add(new Group());
+                Groups[Groups.Count - 1].Elements.Add(getLastElem(reserved));    
             }
         }
-        public void outGroups(){
+        public  void outGroups(){
             for (int i = 0; i < Groups.Count; i++)
             {
-                for(int j=0;j<Groups[i].Count;j++)
-                    Console.Write (Groups[i][j].ToString()+' ');
+                for(int j=0;j<Groups[i].Elements.Count;j++)
+                    Console.Write (Groups[i].Elements[j].ToString()+' ');
                 Console.WriteLine( );
             }
-        }
-        public new void initLabSolver ( ) {
-            groups = new List<List<short>>( );
-            base.initLabSolver( );
-            createGropus( );
         }
         private Int16 getLastElem (List<Int16> reserved )/*get last element if such was not found*/ 
         {
@@ -149,6 +158,13 @@ namespace ConsoleApplication1
             }
             
             return i;
+        }
+
+
+        public lab1Solver()
+        {
+            groups = new List<Group>();
+            operList = new List<string[]>();
         }
     }
 }

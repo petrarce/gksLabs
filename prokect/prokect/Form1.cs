@@ -19,6 +19,7 @@ namespace Lab1_form_1_
             InitializeComponent();
             InitializeComponent_user();
         }
+
         private void TextEntered(object sender, EventArgs e)
         {
             if (sender is TextBox)
@@ -34,6 +35,7 @@ namespace Lab1_form_1_
                 (sender as newTextBox).isCorrectlyChecked = true;
             }
         }
+
         private void Del_Click(object sender, EventArgs e){
 
            this.Controls.Remove(TextBoxes[TextBoxes.Count - 1]);
@@ -78,8 +80,7 @@ namespace Lab1_form_1_
             foreach(TextBox Element in TextBoxes){
                 tmpVar.Add(Element.Text.Split(' '));
             }
-            mainLabSolver=new lab2solver(){OperList=tmpVar};
-            mainLabSolver.initLabSolver();
+            mainLabSolver = new lab1Solver() { OperList = tmpVar };
             MatrixTextBox.Text = "K= " + Convert.ToString(mainLabSolver.KElem)+"\n";
             foreach(Int16[] str in mainLabSolver.Matrix) {
                 foreach (Int16 element in str) {
@@ -88,14 +89,16 @@ namespace Lab1_form_1_
                 MatrixTextBox.Text += "\n";
             }
             Int16 i=1;
-            foreach (List<short> group in mainLabSolver.Groups) {
+            mainLabSolver.createGropus();
+            foreach (Group group in mainLabSolver.Groups) {
                 GroupsTextBox.Text += "Group " + i.ToString()+":";
-                foreach (Int16 element in group) {
+                foreach (Int16 element in group.Elements) {
                     GroupsTextBox.Text += element.ToString() + " ";
                 }
                 GroupsTextBox.Text += "\n";
                 i++;
             }
+            mainLabSolver.GetNewGroups();
             
 
         }
@@ -111,6 +114,7 @@ namespace Lab1_form_1_
             CreateMatrixTextBox();
             getAllInfo();
         }
+
         private void SolveBut_Leave(object sender, EventArgs e)
         {
             errorProvider1.Clear();

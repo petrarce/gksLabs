@@ -59,8 +59,9 @@
     <Compile Include="Form1.Threads.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="lab1Solver .cs" />
-    <Compile Include="lab2solver .cs" />
+    <Compile Include="lab1solver.Lab3.cs" />
+    <Compile Include="lab1Solver.Lab1.cs" />
+    <Compile Include="lab1solver.Lab2.cs" />
     <Compile Include="Program.cs">
       <SubType>Code</SubType>
     </Compile>

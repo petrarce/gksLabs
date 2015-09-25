@@ -95,7 +95,7 @@
             this.TextBoxes = new System.Collections.Generic.List<newTextBox>();
             this.MatrixTextBox = new System.Windows.Forms.RichTextBox();
             this.GroupsTextBox = new System.Windows.Forms.RichTextBox();
-            this.mainLabSolver=new ConsoleApplication1.lab2solver();
+            this.mainLabSolver = new ConsoleApplication1.lab1Solver();
 
             // 
             // GroupsTextBox
@@ -154,7 +154,7 @@
         private System.Windows.Forms.Button addStr;
         private System.Collections.Generic.List<newTextBox> TextBoxes;
         private System.Windows.Forms.Button DelButton;
-        private ConsoleApplication1.lab2solver mainLabSolver;
+        private ConsoleApplication1.lab1Solver mainLabSolver;
         private System.Windows.Forms.Button SolveBut; 
         private System.Windows.Forms.RichTextBox GroupsTextBox;
         private System.Windows.Forms.RichTextBox MatrixTextBox;
