@@ -1,0 +1,9 @@
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\prokect.exe.config
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\prokect.exe
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\prokect.pdb
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\project.csprojResolveAssemblyReference.cache
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\prokect.Form1.resources
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\prokect.Properties.Resources.resources
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\project.csproj.GenerateResource.Cache
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\prokect.exe
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\prokect.pdb
