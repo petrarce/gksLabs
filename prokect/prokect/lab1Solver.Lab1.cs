@@ -10,7 +10,7 @@ namespace ConsoleApplication1
     {
         private Int16 kElem;
         private Int16[][] matrix;
-        public List<String[]> operList;
+        private List<String[]> operList;
         public Int16 KElem { get { return kElem; } }
         public Int16[][] Matrix { get { return matrix; } }
         public List<String[]> OperList { 
@@ -23,119 +23,82 @@ namespace ConsoleApplication1
                 getMatrix();
             }
         }
-
+                
                 private Int16 getKElem(List<List<String>> OurString){
-            List<String> tempStr=new List<string>(), tempStrII=new List<string>();
-            bool CountPlus;
-            Int16 kElem=0;
-            foreach (List<String> fsString in OurString)
-            {
-                foreach(String ssString in fsString){
-                    try{
-                            CountPlus = true;
-                            foreach (String fixStr in tempStr)
-                            {
-                                if (fixStr == ssString)
-                                {
-                                    CountPlus = false;
-                                    break;
-                                }
-                            }
-                            if (CountPlus) {
-                                tempStr.Add(ssString);
-                                kElem += 1;
-                            }
-                        
-                    
+                    List<String> tempStr = new List<String>();//, tempStrII=new List<string>();
+                    foreach (List<String> row in OurString)
+                    {
+                        foreach (String cell in row)
+                        {
+                            tempStr.Add(cell);
+                        }
                     }
-                    catch(NullReferenceException){
-                          tempStr.Add(ssString);
-                          kElem += 1;
-                    }
+                    tempStr.Sort();
+                    DeleteAllRepeatedOperations(ref tempStr);
+                    return (Int16)(tempStr.Count);
                 }
-            }
-            return kElem;   
-        }
                 private Int16 getKElem(List<String[]> OurString){
-            List<String> tempStr=new List<string>(), tempStrII=new List<string>();
-            bool CountPlus;
-            Int16 kElem=0;
-            foreach (String[] fsString in OurString)
-            {
-                foreach(String ssString in fsString){
-                    try{
-                            CountPlus = true;
-                            foreach (String fixStr in tempStr)
-                            {
-                                if (fixStr == ssString)
-                                {
-                                    CountPlus = false;
-                                    break;
-                                }
-                            }
-                            if (CountPlus) {
-                                tempStr.Add(ssString);
-                                kElem += 1;
-                            }
-                        
-                    
+                    List<List<String>> tempConcrtedFromDtringToLidst = new List<List<String>>();
+                    for (Int16 i = 0; i < OurString.Count; i++) {
+                        tempConcrtedFromDtringToLidst.Add(new List<String>());
+                        foreach(String str in OurString[i]) { 
+                            tempConcrtedFromDtringToLidst[i].Add(str);
+                        }
                     }
-                    catch(NullReferenceException){
-                          tempStr.Add(ssString);
-                          kElem += 1;
-                    }
+                        return getKElem(tempConcrtedFromDtringToLidst);
                 }
-            }
-            return kElem;   
-        }
+
                 internal void getKElem(){
                     kElem=getKElem(operList);
                 }
                 private void getMatrix(){
-            List<String> tempStrList=new List<string>();
-            List<String> tempVar=new List<string>();
-            resizeMatrix( operList.Count );
-            for (int i = 0; i < operList.Count - 1; i++)
-            {
-                for (int j = i + 1; j < operList.Count; j++)
-                {
-                    tempVar.AddRange(operList[i]);
-                    tempVar.AddRange(operList[j]);
-                    for (int k = 0; k < operList[i].Length; k++)
+                    List<String> tempStrList=new List<string>();
+                    List<String> tempVar=new List<string>();
+                    resizeMatrix( operList.Count );
+                    for (int i = 0; i < operList.Count - 1; i++)
                     {
-                        for (int l = operList[i].Length; l <= tempVar.Count-1; l++)
+                        for (int j = i + 1; j < operList.Count; j++)
                         {
-                            if (tempVar[k] == tempVar[l])
+                            tempVar.AddRange(operList[i]);
+                            tempVar.AddRange(operList[j]);
+                            for (int k = 0; k < operList[i].Length; k++)
                             {
-                                tempStrList.Add(tempVar[l]);
+                                for (int l = operList[i].Length; l <= tempVar.Count-1; l++)
+                                {
+                                    if (tempVar[k] == tempVar[l])
+                                    {
+                                        tempStrList.Add(tempVar[l]);
+                                    }
+                                }
+                            }
+                            foreach (String tmp in tempStrList)
+                                tempVar.RemoveAll(item => item == tmp);
+                            matrix[j][i] = matrix[i][j]= (Int16)(KElem-tempVar.Count);
+                            tempVar.Clear();
+                            tempStrList.Clear();
+                        }
+                    }
+                }
+                //
+                //Creates Matrix Of with sizeXsize elements
+                //
+                private void resizeMatrix (int size ) {
+                    Array.Resize<Int16[]>( ref matrix, size );
+                    for (int i = 0; i < size; i++)
+                    {
+                        Array.Resize<Int16>( ref matrix[i], size );
+                    }
+                }
+                public  void outMatrix ( ) {
+                    for (int i = 0; i < operList.Count; i++)
+                        {
+                        Console.Write( "\n" );
+                        for (int j = 0; j < operList.Count; j++) 
+                            {
+                            Console.Write(matrix[i][j] +" ");
                             }
                         }
                     }
-                    foreach (String tmp in tempStrList)
-                        tempVar.RemoveAll(item => item == tmp);
-                    matrix[j][i] = matrix[i][j]= (Int16)(KElem-tempVar.Count);
-                    tempVar.Clear();
-                    tempStrList.Clear();
-                }
-            }
-        }
-                private void resizeMatrix (int size ) {
-            Array.Resize<Int16[]>( ref matrix, size );
-            for (int i = 0; i < size; i++)
-            {
-                Array.Resize<Int16>( ref matrix[i], size );
-            }
-        }
-                public  void outMatrix ( ) {
-        for (int i = 0; i < operList.Count; i++)
-            {
-            Console.Write( "\n" );
-            for (int j = 0; j < operList.Count; j++) 
-                {
-                Console.Write(matrix[i][j] +" ");
-                }
-            }
-        }
 
     }
 }

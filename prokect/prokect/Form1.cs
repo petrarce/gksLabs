@@ -90,6 +90,7 @@ namespace Lab1_form_1_
             }
             Int16 i=1;
             mainLabSolver.createGropus();
+            this.GroupsTextBox.Text = "";
             foreach (Group group in mainLabSolver.Groups) {
                 GroupsTextBox.Text += "Group " + i.ToString()+":";
                 foreach (Int16 element in group.Elements) {
@@ -98,8 +99,20 @@ namespace Lab1_form_1_
                 GroupsTextBox.Text += "\n";
                 i++;
             }
+            i = 1;
             mainLabSolver.GetNewGroups();
-            
+            this.NewGroupsTextBox.Text = "";
+            foreach (Group group in mainLabSolver.Groups)
+            {
+                NewGroupsTextBox.Text += "Group " + i.ToString() + ":";
+                foreach (Int16 element in group.Elements)
+                {
+                    NewGroupsTextBox.Text += element.ToString() + " ";
+                }
+                NewGroupsTextBox.Text += "\n";
+                i++;
+            }
+
 
         }
 

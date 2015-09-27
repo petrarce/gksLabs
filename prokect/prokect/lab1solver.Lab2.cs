@@ -4,26 +4,20 @@ using System.Linq;
 using System.Text;
 
 
-public class Group {
-    private List<Int16> elements;
-    private List<String> operations;
-
-    public List<Int16> Elements{ get{return elements;} set {elements=value;}}
-    public List<String> Operations{get {return operations;} set {operations=value;}}
-
-    public Group() {
-        elements = new List<Int16>();
-        operations = new List<String>();
-    
-    }
-}
 
 namespace ConsoleApplication1
 {
+    public partial class Group {
+        private List<Int16> elements;
+        private List<String> operations;
+
+        public List<Int16> Elements{ get{return elements;} set {elements=value;}}
+        public List<String> Operations{get {return operations;} set {operations=value;}}
+
+    }
+
     public partial class lab1Solver
     {
-        //private Int16 groupCount;
-       // public Int16 GroupCount { get { return groupCount; } }
         private List<Group> groups;
         public List<Group> Groups { get { return groups; } }
         
@@ -40,8 +34,9 @@ namespace ConsoleApplication1
             }
             return false;
         }
+        //open new group
         private void openGroup ( Int16 i, Int16 j, ref List<Int16> reserved )
-        {//open new group
+        {
             Groups.Add( new Group() );
             addElInGroup( i, ref reserved );
             addElInGroup( j, ref reserved );
@@ -142,7 +137,8 @@ namespace ConsoleApplication1
                 Console.WriteLine( );
             }
         }
-        private Int16 getLastElem (List<Int16> reserved )/*get last element if such was not found*/ 
+        /*get last element if such was not found*/
+        private Int16 getLastElem (List<Int16> reserved ) 
         {
             Int16 i,j;
             for ( i = 0; i < Matrix.Length-1; i++)

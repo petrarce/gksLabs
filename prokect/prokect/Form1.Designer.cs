@@ -96,6 +96,7 @@
             this.MatrixTextBox = new System.Windows.Forms.RichTextBox();
             this.GroupsTextBox = new System.Windows.Forms.RichTextBox();
             this.mainLabSolver = new ConsoleApplication1.lab1Solver();
+            this.NewGroupsTextBox = new System.Windows.Forms.RichTextBox();
 
             // 
             // GroupsTextBox
@@ -115,6 +116,15 @@
             this.MatrixTextBox.TabIndex = 6;
             this.MatrixTextBox.Text = "";
             this.MatrixTextBox.ReadOnly = true;
+            // 
+            // NewGroupsTextBox
+            // 
+            this.NewGroupsTextBox.Location = new System.Drawing.Point(310, 71+135);
+            this.NewGroupsTextBox.Name = "NewGroupsTextBox";
+            this.NewGroupsTextBox.Size = new System.Drawing.Size(135, 132);
+            this.NewGroupsTextBox.TabIndex = 6;
+            this.NewGroupsTextBox.Text = "";
+            this.NewGroupsTextBox.ReadOnly = true;
             //
             //TextBoxes
             //
@@ -130,8 +140,10 @@
             this.Controls.Add(TextBoxes[TextBoxes.Count - 1]);
             this.Controls.Add(GroupsTextBox);
             this.Controls.Add(MatrixTextBox);
+            this.Controls.Add(NewGroupsTextBox);
         }
         private delegate void EventHeandler1(object sender, System.EventArgs e, System.String str);
+        
         private void NewTextbox() {
             if (TextBoxes.Count != 0)
             {
@@ -159,6 +171,7 @@
         private System.Windows.Forms.RichTextBox GroupsTextBox;
         private System.Windows.Forms.RichTextBox MatrixTextBox;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.RichTextBox NewGroupsTextBox;
 
     }
 }
