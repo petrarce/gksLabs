@@ -98,7 +98,7 @@ namespace ConsoleApplication1
             Groups[Groups.Count-1].Elements.Add(value);//add value intp group(!(groupCount) while becomes )
             reserved.Add( value );// add value into reserved list (not to take it again)
         }
-        public  void createGropus ( )
+        public void createGroups()
         {
             Int16 e;
             List<Int16> reserved = new List<Int16>( );

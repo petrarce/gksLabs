@@ -89,7 +89,7 @@ namespace Lab1_form_1_
                 MatrixTextBox.Text += "\n";
             }
             Int16 i=1;
-            mainLabSolver.createGropus();
+            mainLabSolver.createGroups();
             this.GroupsTextBox.Text = "";
             foreach (Group group in mainLabSolver.Groups) {
                 GroupsTextBox.Text += "Group " + i.ToString()+":";

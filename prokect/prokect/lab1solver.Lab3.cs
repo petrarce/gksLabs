@@ -114,7 +114,7 @@ namespace ConsoleApplication1
             }
         }
             private void RefreshGroup(Int16 i) {
-                Int16 groupsToCompare=0, MaxGroupNumber;
+                Int16 groupsToCompare = 0;
                 for (Int16 j = (Int16)(i + 1); j < groups.Count; j++) {
                     for (Int16 k = i; k <= i + groupsToCompare; k++) {
                         if (CompareGroups(k, j))
@@ -124,18 +124,24 @@ namespace ConsoleApplication1
                             }
                             groups[k + 1].BackupGroup = groups[k + 1];
                             groupsToCompare++;
-                            continue;
+                            break;
                         }
                     }
-                    MaxGroupNumber = FinMaxGroupe(j);
-                    DeleteOperationsAndElementsFromGroup(MaxGroupNumber);
-                    DeleteGroups(MaxGroupNumber);
+                    //MaxGroupNumber = FinMaxGroupe(j);
+                    //DeleteOperationsAndElementsFromGroup(MaxGroupNumber);
+                    //DeleteGroups(MaxGroupNumber);
                 }
+                SortGroups(i);
+                DeleteOperationsAndElementsFromGroup(i);
+                DeleteGroups(i);
             }
+            /*private void RefreshGroup(Int16 i) {
+                GetElementsIntoMaxGroup( i);
+                DeleteElementsAndOperationsFroumOtherGroups(i);
+            }*/
                 #region RefreshGroup functions
                      #region CompareGroups functions
-                     private Boolean CompareGroups(Int16 k, Int16 j)
-                        {
+                     private Boolean CompareGroups(Int16 k, Int16 j){
                             Int16 switcher=CompareGroups(groups[k].Operations,groups[j].Operations);
                             switch (switcher) { 
                                 case 0:
@@ -150,7 +156,7 @@ namespace ConsoleApplication1
                                     return false;
                             }
                             return false;
-                            }
+                       }
                     //function checks all operations in group 
                     //and compare this groups by operations
                     //returns 0 if amount of operations in first and secound groups are equal and operations are too equaly
@@ -183,7 +189,7 @@ namespace ConsoleApplication1
                         {
                             //IEnumerator<Int16> tempEnumerator = groups[j].Elements.GetEnumerator();
                             //while (tempEnumerator.MoveNext()){
-                            for(int i=0;i<groups[j].Elements.Count-1;i++){
+                            for(int i=0;i<groups[j].Elements.Count;i++){
                                 groups[k].Elements.Add(groups[j].Elements[i]);
                             }
                             groups[k].ToDeleteInfo.Add(new GroupToDeleteInfo());
@@ -218,11 +224,11 @@ namespace ConsoleApplication1
 
                     #endregion
             // find max by using index
-            private Int16 FinMaxGroupe(Int16 j) {
-                Int16 i=0;
-                try
-                {
-                    while (groups[j].BackupGroup != null)
+            //private Int16 FinMaxGroupe(Int16 j) {
+                //Int16 i=0;
+              //  try
+                //{
+                    /*while (groups[j].BackupGroup != null)
                     {
                         if (groups[i].BackupGroup.Elements.Count < groups[j].BackupGroup.Elements.Count)
                         {
@@ -231,21 +237,27 @@ namespace ConsoleApplication1
                             i = j;
                         }
                         j++;
-                    }
-                }
-                catch (ArgumentOutOfRangeException) { }
-                    ComparerEqualyGroups(i, (Int16)(j - 1));
-                    return i;                 
-
-            }
+                    }*/
+                   // SortGroups(j);
+                    /*Int16 i = (Int16)(j + 1);
+                    while (groups[j].BackupGroup != null)
+                    {
+                        groups[j] = groups[j].BackupGroup;
+                        ComparerEqualyGroups(j, i);
+                        i++;
+                    }*/
+             //   }
+               // catch (ArgumentOutOfRangeException) { }
+              //  catch (IndexOutOfRangeException) { }
+          //  }
             //compare all equaly groups 
-                private void ComparerEqualyGroups(Int16 MaxGroup,Int16 j){
-                while (j != 0) {
-                    CompareGroups(MaxGroup,(Int16)(j));
-                    j--;
-                }
-                groups[MaxGroup].BackupGroup = null;
-            }
+                /*private void ComparerEqualyGroups(Int16 MaxGroup,Int16 j){
+                    while (j != 0) {
+                        CompareGroups(MaxGroup,(Int16)(j));
+                        j--;
+                    }
+                    groups[MaxGroup].BackupGroup = null;
+                }*/
             private void DeleteGroups(Int16 MaxGroup) {
                 GroupToDeleteInfo tempEnumerator = new GroupToDeleteInfo();
                 for(Int16 i=(Int16)(groups[MaxGroup].ToDeleteInfo.Count-1);i==0;i++){
@@ -256,17 +268,23 @@ namespace ConsoleApplication1
                         
             }
             private void DeleteOperationsAndElementsFromGroup(Int16 MaxGroup) {
-                IEnumerator<GroupToDeleteInfo> tempToDeleteInfo=groups[MaxGroup].ToDeleteInfo.GetEnumerator();
-                while(tempToDeleteInfo.MoveNext()) {
-                    if (tempToDeleteInfo.Current.Elements == null)
-                        continue;
-                    IEnumerator<Int16> tempElements = tempToDeleteInfo.Current.Elements.GetEnumerator();
-                    while (tempElements.MoveNext())
-                    {
-                            groups[tempToDeleteInfo.Current.Group - 1].Elements.Remove(tempElements.Current);
+                foreach(GroupToDeleteInfo toDeleteInfo in groups[MaxGroup].ToDeleteInfo){
+                    if(toDeleteInfo.Elements!=null){
+                        foreach(Int16 element in toDeleteInfo.Elements){
+                            groups[toDeleteInfo.Group].Elements.Remove(element);
+                        }
+                        FindAllOperationsInGroup(toDeleteInfo.Group);
                     }
-                    FindOperationsInGroup(tempToDeleteInfo.Current.Group);
                 }
+                groups[MaxGroup].BackupGroup=null;
+            }
+            private Int16 ClearAllBackupGroups(Int16 MaxGroup){
+                Int16 i=(Int16)(MaxGroup+1);
+                while(groups[i].BackupGroup!=null){
+                    groups[i]=groups[i].BackupGroup;
+                    groups[i].BackupGroup=null;
+                }
+                return i;
             }
                     #endregion
 
