@@ -192,7 +192,6 @@ namespace ConsoleApplication1
                         }
                         private void GetElementsPartialy(Int16 k, Int16 j)
                         {
-                            IEnumerator<GroupToDeleteInfo> tmpr;
                             List<String> tmprOperList=new List<string>();
                             foreach (Int16 element in groups[j].Elements) {
                                 tmprOperList.Clear();

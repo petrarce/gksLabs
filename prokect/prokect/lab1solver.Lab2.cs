@@ -102,7 +102,7 @@ namespace ConsoleApplication1
         {
             Int16 e;
             List<Int16> reserved = new List<Int16>( );
-            for (Int16 k = 9; k >= 0; k--)
+            for (Int16 k = KElem; k >= 0; k--)
             {
                 for (Int16 i = 1; i < operList.Count; i++)
                 {
