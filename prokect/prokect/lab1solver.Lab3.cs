@@ -127,18 +127,11 @@ namespace ConsoleApplication1
                             break;
                         }
                     }
-                    //MaxGroupNumber = FinMaxGroupe(j);
-                    //DeleteOperationsAndElementsFromGroup(MaxGroupNumber);
-                    //DeleteGroups(MaxGroupNumber);
                 }
                 SortGroups(i);
                 DeleteOperationsAndElementsFromGroup(i);
                 DeleteGroups(i);
             }
-            /*private void RefreshGroup(Int16 i) {
-                GetElementsIntoMaxGroup( i);
-                DeleteElementsAndOperationsFroumOtherGroups(i);
-            }*/
                 #region RefreshGroup functions
                      #region CompareGroups functions
                      private Boolean CompareGroups(Int16 k, Int16 j){
@@ -187,8 +180,6 @@ namespace ConsoleApplication1
                         #region GetElementsPartialy functions
                         private void GetElementsAll(Int16 k, Int16 j)
                         {
-                            //IEnumerator<Int16> tempEnumerator = groups[j].Elements.GetEnumerator();
-                            //while (tempEnumerator.MoveNext()){
                             for(int i=0;i<groups[j].Elements.Count;i++){
                                 groups[k].Elements.Add(groups[j].Elements[i]);
                             }
@@ -223,41 +214,6 @@ namespace ConsoleApplication1
 
 
                     #endregion
-            // find max by using index
-            //private Int16 FinMaxGroupe(Int16 j) {
-                //Int16 i=0;
-              //  try
-                //{
-                    /*while (groups[j].BackupGroup != null)
-                    {
-                        if (groups[i].BackupGroup.Elements.Count < groups[j].BackupGroup.Elements.Count)
-                        {
-                            groups[i] = groups[i].BackupGroup;
-                            groups[i].BackupGroup = null;
-                            i = j;
-                        }
-                        j++;
-                    }*/
-                   // SortGroups(j);
-                    /*Int16 i = (Int16)(j + 1);
-                    while (groups[j].BackupGroup != null)
-                    {
-                        groups[j] = groups[j].BackupGroup;
-                        ComparerEqualyGroups(j, i);
-                        i++;
-                    }*/
-             //   }
-               // catch (ArgumentOutOfRangeException) { }
-              //  catch (IndexOutOfRangeException) { }
-          //  }
-            //compare all equaly groups 
-                /*private void ComparerEqualyGroups(Int16 MaxGroup,Int16 j){
-                    while (j != 0) {
-                        CompareGroups(MaxGroup,(Int16)(j));
-                        j--;
-                    }
-                    groups[MaxGroup].BackupGroup = null;
-                }*/
             private void DeleteGroups(Int16 MaxGroup) {
                 GroupToDeleteInfo tempEnumerator = new GroupToDeleteInfo();
                 for(Int16 i=(Int16)(groups[MaxGroup].ToDeleteInfo.Count-1);i==0;i++){
