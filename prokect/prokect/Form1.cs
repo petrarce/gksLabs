@@ -75,45 +75,20 @@ namespace Lab1_form_1_
             
         }
 
-        private void getAllInfo(){
-            List<String[]> tmpVar=new List<String[]>();
-            foreach(TextBox Element in TextBoxes){
-                tmpVar.Add(Element.Text.Split(' '));
-            }
-            mainLabSolver = new lab1Solver() { OperList = tmpVar };
-            MatrixTextBox.Text = "K= " + Convert.ToString(mainLabSolver.KElem)+"\n";
-            foreach(Int16[] str in mainLabSolver.Matrix) {
-                foreach (Int16 element in str) {
-                    MatrixTextBox.Text += Convert.ToString(element)+" ";
-                }
-                MatrixTextBox.Text += "\n";
-            }
-            Int16 i=1;
-            mainLabSolver.createGroups();
-            this.GroupsTextBox.Text = "";
-            foreach (Group group in mainLabSolver.Groups) {
-                GroupsTextBox.Text += "Group " + i.ToString()+":";
-                foreach (Int16 element in group.Elements) {
-                    GroupsTextBox.Text += element.ToString() + " ";
-                }
-                GroupsTextBox.Text += "\n";
-                i++;
-            }
-            i = 1;
-            mainLabSolver.GetNewGroups();
-            this.NewGroupsTextBox.Text = "";
-            foreach (Group group in mainLabSolver.Groups)
-            {
-                NewGroupsTextBox.Text += "Group " + i.ToString() + ":";
-                foreach (Int16 element in group.Elements)
-                {
-                    NewGroupsTextBox.Text += element.ToString() + " ";
-                }
-                NewGroupsTextBox.Text += "\n";
-                i++;
-            }
-
-
+        private void getAllInfo() {
+            Thread Thread1;
+            InitializeMatrix();
+            GridMatrix.TopLeftHeaderCell.Value ="K="+ mainLabSolver.KElem.ToString();
+            Thread1 = new Thread(GetGroupsFunction);
+            Thread1.Name = "secondary1";
+            Thread1.Start();
+            OutputMatrix();
+            WaitForThread.WaitOne();
+            Thread1 = new Thread(GetNewGroupsFunction);
+            Thread1.Start();
+            OutputGroups(ref GridGroups);
+            WaitForThread.WaitOne();
+            OutputGroups(ref GridNewGroups);
         }
 
         private void SolveBut_Click(object sender, EventArgs e)
@@ -122,15 +97,17 @@ namespace Lab1_form_1_
                 errorProvider1.SetError((sender as Button), "check your textboxes for correcr input");
                 return;
             }
-
-            CreateGroupTextBox();
-            CreateMatrixTextBox();
             getAllInfo();
         }
 
         private void SolveBut_Leave(object sender, EventArgs e)
         {
             errorProvider1.Clear();
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
     }

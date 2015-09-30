@@ -33,7 +33,13 @@
             this.DelButton = new System.Windows.Forms.Button();
             this.SolveBut = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.GridMatrix = new System.Windows.Forms.DataGridView();
+            this.GridGroups = new System.Windows.Forms.DataGridView();
+            this.GridNewGroups = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridMatrix)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridGroups)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridNewGroups)).BeginInit();
             this.SuspendLayout();
             // 
             // addStr
@@ -59,7 +65,7 @@
             // 
             // SolveBut
             // 
-            this.SolveBut.Location = new System.Drawing.Point(310, 372);
+            this.SolveBut.Location = new System.Drawing.Point(310, 634);
             this.SolveBut.Name = "SolveBut";
             this.SolveBut.Size = new System.Drawing.Size(75, 23);
             this.SolveBut.TabIndex = 5;
@@ -74,57 +80,60 @@
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
+            // GridMatrix
+            // 
+            this.GridMatrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridMatrix.Location = new System.Drawing.Point(310, 56);
+            this.GridMatrix.Name = "GridMatrix";
+            this.GridMatrix.ReadOnly = true;
+            this.GridMatrix.Size = new System.Drawing.Size(372, 250);
+            this.GridMatrix.TabIndex = 6;
+            // 
+            // GridGroups
+            // 
+            this.GridGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridGroups.Location = new System.Drawing.Point(741, 56);
+            this.GridGroups.Name = "GridGroups";
+            this.GridGroups.ReadOnly = true;
+            this.GridGroups.Size = new System.Drawing.Size(372, 250);
+            this.GridGroups.TabIndex = 6;
+            // 
+            // GridNewGroups
+            // 
+            this.GridNewGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridNewGroups.Location = new System.Drawing.Point(310, 365);
+            this.GridNewGroups.Name = "GridNewGroups";
+            this.GridNewGroups.ReadOnly = true;
+            this.GridNewGroups.Size = new System.Drawing.Size(372, 249);
+            this.GridNewGroups.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(609, 407);
+            this.ClientSize = new System.Drawing.Size(1204, 753);
+            this.Controls.Add(this.GridGroups);
+            this.Controls.Add(this.GridNewGroups);
+            this.Controls.Add(this.GridMatrix);
             this.Controls.Add(this.SolveBut);
             this.Controls.Add(this.DelButton);
             this.Controls.Add(this.addStr);
             this.Name = "Form1";
             this.ShowInTaskbar = false;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridMatrix)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridGroups)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridNewGroups)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         private void InitializeComponent_user(){
             this.TextBoxes = new System.Collections.Generic.List<newTextBox>();
-            this.MatrixTextBox = new System.Windows.Forms.RichTextBox();
-            this.GroupsTextBox = new System.Windows.Forms.RichTextBox();
             this.mainLabSolver = new ConsoleApplication1.lab1Solver();
-            this.NewGroupsTextBox = new System.Windows.Forms.RichTextBox();
-
-            // 
-            // GroupsTextBox
-            // 
-            this.GroupsTextBox.Location = new System.Drawing.Point(462, 71);
-            this.GroupsTextBox.Name = "GroupsTextBox";
-            this.GroupsTextBox.Size = new System.Drawing.Size(135, 132);
-            this.GroupsTextBox.TabIndex = 6;
-            this.GroupsTextBox.Text = "";
-            this.GroupsTextBox.ReadOnly = true;
-            // 
-            // MatrixTextBox
-            // 
-            this.MatrixTextBox.Location = new System.Drawing.Point(310, 71);
-            this.MatrixTextBox.Name = "MatrixTextBox";
-            this.MatrixTextBox.Size = new System.Drawing.Size(135, 132);
-            this.MatrixTextBox.TabIndex = 6;
-            this.MatrixTextBox.Text = "";
-            this.MatrixTextBox.ReadOnly = true;
-            // 
-            // NewGroupsTextBox
-            // 
-            this.NewGroupsTextBox.Location = new System.Drawing.Point(310, 71+135);
-            this.NewGroupsTextBox.Name = "NewGroupsTextBox";
-            this.NewGroupsTextBox.Size = new System.Drawing.Size(135, 132);
-            this.NewGroupsTextBox.TabIndex = 6;
-            this.NewGroupsTextBox.Text = "";
-            this.NewGroupsTextBox.ReadOnly = true;
             //
             //TextBoxes
             //
@@ -138,9 +147,6 @@
             //
             //
             this.Controls.Add(TextBoxes[TextBoxes.Count - 1]);
-            this.Controls.Add(GroupsTextBox);
-            this.Controls.Add(MatrixTextBox);
-            this.Controls.Add(NewGroupsTextBox);
         }
         private delegate void EventHeandler1(object sender, System.EventArgs e, System.String str);
         
@@ -168,10 +174,10 @@
         private System.Windows.Forms.Button DelButton;
         private ConsoleApplication1.lab1Solver mainLabSolver;
         private System.Windows.Forms.Button SolveBut; 
-        private System.Windows.Forms.RichTextBox GroupsTextBox;
-        private System.Windows.Forms.RichTextBox MatrixTextBox;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.RichTextBox NewGroupsTextBox;
+        private System.Windows.Forms.DataGridView GridGroups;
+        private System.Windows.Forms.DataGridView GridNewGroups;
+        private System.Windows.Forms.DataGridView GridMatrix;
 
     }
 }

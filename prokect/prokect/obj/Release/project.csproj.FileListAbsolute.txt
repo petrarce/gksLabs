@@ -1,0 +1,8 @@
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Release\prokect.exe.config
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Release\prokect.exe
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Release\prokect.pdb
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Release\prokect.Form1.resources
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Release\prokect.Properties.Resources.resources
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Release\project.csproj.GenerateResource.Cache
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Release\prokect.exe
+C:\Users\Ivan\YandexDisk-papasmail\KPI\III\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Release\prokect.pdb
