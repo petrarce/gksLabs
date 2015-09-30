@@ -7,14 +7,6 @@ using System.Text;
 
 namespace ConsoleApplication1
 {
-    public partial class Group {
-        private List<Int16> elements;
-        private List<String> operations;
-
-        public List<Int16> Elements{ get{return elements;} set {elements=value;}}
-        public List<String> Operations{get {return operations;} set {operations=value;}}
-
-    }
 
     public partial class lab1Solver
     {
@@ -98,7 +90,7 @@ namespace ConsoleApplication1
             Groups[Groups.Count-1].Elements.Add(value);//add value intp group(!(groupCount) while becomes )
             reserved.Add( value );// add value into reserved list (not to take it again)
         }
-        public void createGroups()
+        public  void createGroups()
         {
             Int16 e;
             List<Int16> reserved = new List<Int16>( );

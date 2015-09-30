@@ -9,34 +9,9 @@ using ConsoleApplication1;
 
 namespace ConsoleApplication1
 {
-    
-    public class GroupToDeleteInfo
-    {
-        private Int16 group;
-        private  List<Int16> elements;
 
-        public Int16 Group { get { return group; } set { group = value; } }
-        public List<Int16> Elements { get { return elements; } set { elements = value; } }
-        public GroupToDeleteInfo()
-        {
-            elements = new List<Int16>();
-        }
-    }
 
-    public partial class Group
-    {
-        public Group BackupGroup;
-        public List<GroupToDeleteInfo> ToDeleteInfo;
-
-        public Group()
-        {
-            elements = new List<Int16>();
-            operations = new List<String>();
-            ToDeleteInfo = new List<GroupToDeleteInfo>();
-        }
-    }
-
-    partial class lab1Solver
+    public partial class lab1Solver
     {
     
         #region getNewGroups
@@ -78,12 +53,11 @@ namespace ConsoleApplication1
                 groups[i].Operations = tmprOperationListWithRepeats;
             }
             private void DeleteAllRepeatedOperations(ref List<String> OperationsWithRepeats){
-                for (int j = 0; j < OperationsWithRepeats.Count - 1; j++)
+                for (int j = OperationsWithRepeats.Count-1; j > 0; j--)
                 {
-                    if (OperationsWithRepeats[j] == OperationsWithRepeats[j + 1])
+                    if (OperationsWithRepeats[j] == OperationsWithRepeats[j - 1])
                     {
-                        OperationsWithRepeats.Remove(OperationsWithRepeats[j + 1]);
-                        j--;
+                        OperationsWithRepeats.RemoveAt(j-1);
                     }
                 }
             }

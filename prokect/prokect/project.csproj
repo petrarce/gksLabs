@@ -62,6 +62,7 @@
     <Compile Include="lab1solver.Lab3.cs" />
     <Compile Include="lab1Solver.Lab1.cs" />
     <Compile Include="lab1solver.Lab2.cs" />
+    <Compile Include="lab1solver.Types.cs" />
     <Compile Include="Program.cs">
       <SubType>Code</SubType>
     </Compile>
