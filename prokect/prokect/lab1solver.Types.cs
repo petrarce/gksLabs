@@ -6,25 +6,39 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication1
 {
+        public class OperationsClass:Object{
+            protected List<String> operations;
+            public List<String> Operations { get { return operations; } set { operations = value; } }
+        }
 
-        public class Group:Object
+        public sealed class Group:OperationsClass
         {
+
+            private List<Int16> elements;
+            private List<Modul> moduls;
+            private Matrix connectionMatrix;
+
             public Group BackupGroup;
             public List<GroupToDeleteInfo> ToDeleteInfo;
-            private List<Int16> elements;
-            private List<String> operations;
-
             public List<Int16> Elements { get { return elements; } set { elements = value; } }
-            public List<String> Operations { get { return operations; } set { operations = value; } }
+            public List<Modul> Moduls { get { return moduls; } set { moduls = value; } }
+            public Matrix ConnectionMatrix { get { return connectionMatrix; } set { connectionMatrix = value; } }
 
             public Group()
             {
                 elements = new List<Int16>();
                 operations = new List<String>();
                 ToDeleteInfo = new List<GroupToDeleteInfo>();
+                connectionMatrix = new Matrix();
             }
         }
 
+        public sealed class Modul : OperationsClass {
+            Modul() {
+                this.operations = new List<string>();
+            }
+        }   
+        
         public class GroupToDeleteInfo : Object
         {
             private Int16 group;//asdasd
@@ -38,4 +52,10 @@ namespace ConsoleApplication1
                 elements = new List<Int16>();
             }
         }
+
+        public class Matrix:Dictionary<String,Dictionary<String,Boolean>>
+        {
+            public Matrix():base() { }                
+        }
+        
 }

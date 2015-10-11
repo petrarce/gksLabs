@@ -149,10 +149,6 @@ namespace ConsoleApplication1
         }
 
 
-        public lab1Solver()
-        {
-            groups = new List<Group>();
-            operList = new List<string[]>();
-        }
+
     }
 }
