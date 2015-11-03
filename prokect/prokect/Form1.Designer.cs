@@ -115,10 +115,10 @@
             this.ClientSize = new System.Drawing.Size(1204, 753);
             this.Controls.Add(this.GridGroups);
             this.Controls.Add(this.GridNewGroups);
-            this.Controls.Add(this.GridMatrix);
             this.Controls.Add(this.SolveBut);
             this.Controls.Add(this.DelButton);
             this.Controls.Add(this.addStr);
+            this.Controls.Add(this.GridMatrix);
             this.Name = "Form1";
             this.ShowInTaskbar = false;
             this.Text = "Form1";

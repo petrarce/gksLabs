@@ -89,7 +89,7 @@ namespace Lab1_form_1_
             OutputGroups(ref GridGroups);
             WaitForThread.WaitOne();
             OutputGroups(ref GridNewGroups);
-            mainLabSolver.GetNewModuls();
+            mainLabSolver.StartLab4Task();
         }
 
         private void SolveBut_Click(object sender, EventArgs e)

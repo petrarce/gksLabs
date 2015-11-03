@@ -12,7 +12,9 @@ namespace ConsoleApplication1
         {
             InitializeNewElements();
             for(Int16 i = 0; i < Groups.Count; i++)
+            {
                 GetNewModuls(i);
+            }
         }
         internal void InitializeNewElements() 
         {
@@ -25,7 +27,6 @@ namespace ConsoleApplication1
                     Groups[GroupNumber].Moduls = new List<Modul>();
                     groups[GroupNumber].ConnectionMatrix = new Matrix();
                     InitializeFirstModuls(GroupNumber);
-                    GetComunicationMatrix(GroupNumber);
 
                 }
                 private void InitializeFirstModuls(Int16 GroupNumber) 
@@ -41,6 +42,7 @@ namespace ConsoleApplication1
                 }
                     private void CreateMatrix(Int16 GroupNumber)
                     {
+                        Groups[GroupNumber].ConnectionMatrix = new Matrix();
                         foreach (Modul modulNameRow in Groups[GroupNumber].Moduls)
                         {
                             Groups[GroupNumber].ConnectionMatrix.Add(modulNameRow.ModulName, new Dictionary<String, Boolean>());
@@ -67,21 +69,20 @@ namespace ConsoleApplication1
                                 tempElementOperation = operation;
                             }
                     }
+
         
         
         
         private void GetNewModuls(Int16 GroupNumber)
         {
+            GetComunicationMatrix(GroupNumber);
             while(GetNewModul(GroupNumber)) { }
         }
         private bool GetNewModul(Int16 GroupNumber)
             {
-               // if(FindWeight(GroupNumber))
-                //    return true;
+                FindWeight(GroupNumber);
                 if(CheckChain(GroupNumber))
                     return true;
-                //CheckInterrelation( GroupNumber);
-                //CheckInOutOnly( GroupNumber);
                 return false;
             }
             //Checking for chain existing
@@ -99,12 +100,16 @@ namespace ConsoleApplication1
                     if(!RowAndColWeight(1,1,GroupNumber,Current)) {
                         continue;
                     }
-                    do{
+                    PotentialModul.Add(FindPrev(Current, GroupNumber));
+                    while (RowAndColWeight(1, 1, GroupNumber, Current))
+                    {
                         PotentialModul.Add(Current);
                         Current = FindNext(Current, GroupNumber);
-                        tempChecked.Add(modul.ModulName);
-                    } while(RowAndColWeight(1,1,GroupNumber,Current));
-                    if(!RowAndColWeight(1, 0, GroupNumber, Current))//!!!
+                        tempChecked.Add(Current);
+                        
+                    }
+                    PotentialModul.Add(Current);
+                    if(RowAndColWeight(1, 0, GroupNumber, Current))//!!!
                     {
                         continue;
                     }
@@ -112,6 +117,7 @@ namespace ConsoleApplication1
                         Groups[GroupNumber].ConnectionMatrix[Current][PotentialModul[0]] == true)
                     {
                         CreateModul(GroupNumber,PotentialModul);
+                        CleanConnectionMatrix(GroupNumber, PotentialModul);
                         return true;
                     }
 
@@ -126,43 +132,68 @@ namespace ConsoleApplication1
                     }
                     return "";
                 }
+                private String FindPrev(String Current, Int16 GroupNumber)
+                {
+                    foreach(var Element in Groups[GroupNumber].ConnectionMatrix)
+                    {
+                        if(Element.Value[Current] == true)
+                            return Element.Key;
+                    }
+                    return "";
+                }
+
                 private void CreateModul(Int16 GroupNumber,List<String> PotentialModul)
                 {
-                    /*Modul tempFirstModul,tempModul;
-                    foreach(var modul in Groups[GroupNumber].Moduls )
-                        if(modul.ModulName==PotentialModul[0]){
-                            tempFirstModul = modul;
-                            break;
-                        }*/
                     foreach(var Element in PotentialModul) { 
                         if(Element==PotentialModul[0])
                             continue;
-                        AddRowsAndColumns(PotentialModul[0], Element, GroupNumber);
-                        //AddColumns(PotentialModul[0], Element);
-                        DeleteModuls(PotentialModul, GroupNumber);
+                        AddRowsAndColumns(PotentialModul, Element, GroupNumber);
                     }
+                    DeleteModuls(PotentialModul, GroupNumber);
                 }
-                    private void AddRowsAndColumns(String FirstModul, String DeletingModul,Int16 GroupNumber)
+                private void AddRowsAndColumns(List<String> PotentialModul, String DeletingModul, Int16 GroupNumber)
                     {
-                        foreach(var element in Groups[GroupNumber].Moduls){
-                            if(Groups[GroupNumber].ConnectionMatrix[DeletingModul][element.ModulName]==true)
-                                Groups[GroupNumber].ConnectionMatrix[FirstModul][element.ModulName] = true;
-                            if(Groups[GroupNumber].ConnectionMatrix[element.ModulName][DeletingModul]==true)
-                                Groups[GroupNumber].ConnectionMatrix[element.ModulName][FirstModul] = true;
+                        foreach (var Element in PotentialModul)
+                        {
+                            if (Element == PotentialModul[0])
+                                continue;
+                            if (Groups[GroupNumber].ConnectionMatrix[DeletingModul][Element] == true)
+                                Groups[GroupNumber].ConnectionMatrix[PotentialModul[0]][Element] = true;
+                            if (Groups[GroupNumber].ConnectionMatrix[Element][DeletingModul] == true)
+                                Groups[GroupNumber].ConnectionMatrix[Element][PotentialModul[0]] = true;
                         }
-                        Groups[GroupNumber].ConnectionMatrix[FirstModul][FirstModul] = false;
+                        Groups[GroupNumber].ConnectionMatrix[PotentialModul[0]][PotentialModul[0]] = false;
                     }
                     private void DeleteModuls(List<String> PotentialModul,Int16 GroupNumber){
-                        foreach(var element in PotentialModul)
+                        Modul modul= new Modul(), firstModul=new Modul();
+                        foreach (var mod in Groups[GroupNumber].Moduls) {
+                            if (mod.ModulName == PotentialModul[0])
+                                firstModul = mod;
+                        }
+                        foreach (var Element in PotentialModul)
                         {
-                            foreach(var row in Groups[GroupNumber].Moduls)
-                            {
-                                Groups[GroupNumber].ConnectionMatrix[row.ModulName].Remove(element);
+                            if (Element == PotentialModul[0])
+                                continue;
+                            foreach (var mod in Groups[GroupNumber].Moduls) {
+                                if (mod.ModulName == Element)
+                                    modul = mod;
                             }
-                            Groups[GroupNumber].ConnectionMatrix.Remove(element);
-                            foreach(var modul in Groups[GroupNumber].Moduls)
-                                if(modul.ModulName==element)
-                                    Groups[GroupNumber].Moduls.Remove(modul);
+                            Groups[GroupNumber].Moduls[Groups[GroupNumber].Moduls.FindIndex(x => x.Equals(firstModul))].Operations.AddRange(
+                                    Groups[GroupNumber].Moduls[Groups[GroupNumber].Moduls.FindIndex(x => x.Equals(modul))].Operations);
+                            Groups[GroupNumber].Moduls.Remove(modul);
+                        }                   
+                    }
+                    private void CleanConnectionMatrix(Int16 GroupNumber, List<String> PotentialModul)
+                    {
+                        foreach (String Element in PotentialModul) 
+                        {
+                            if (Element == PotentialModul[0])
+                                continue;
+                            foreach (String Row in Groups[GroupNumber].ConnectionMatrix.Keys)
+                            {
+                                Groups[GroupNumber].ConnectionMatrix[Row].Remove(Element);
+                            }
+                            Groups[GroupNumber].ConnectionMatrix.Remove(Element);
                         }
                     }
             //checks if modul are in checked
