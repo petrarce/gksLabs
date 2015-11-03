@@ -79,6 +79,7 @@ namespace ConsoleApplication1
             public Dictionary<String, Int16> ColumnWeight { get { return columnWeight; } set { columnWeight = value; } }
 
             public void FindRowWeight() {
+                rowWeight = new Dictionary<string, short>();
                 foreach(String Row in this.Keys) {
                     rowWeight.Add(Row, 0);
                     foreach(String Col in this[Row].Keys) {
@@ -90,6 +91,7 @@ namespace ConsoleApplication1
             }
             public void FindColWeight()
             {
+                columnWeight = new Dictionary<string, short>();
                 foreach(String Col in this.Keys)
                 {
                     columnWeight.Add(Col, 0);

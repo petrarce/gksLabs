@@ -83,6 +83,8 @@ namespace ConsoleApplication1
                 FindWeight(GroupNumber);
                 if(CheckChain(GroupNumber))
                     return true;
+                if (CheckMutual(GroupNumber))
+                    return true;
                 return false;
             }
             //Checking for chain existing
@@ -197,6 +199,32 @@ namespace ConsoleApplication1
                         }
                     }
             //checks if modul are in checked
+            private bool CheckMutual(Int16 GroupNumber) {
+                String Current;
+                List<String> PotentialModul=new List<String>();
+                List<String> tempChecked = new List<String>();//Names of checked moduls
+                foreach (Modul modul in Groups[GroupNumber].Moduls)
+                {
+                    if (ModulInChecked(tempChecked, modul))
+                        continue;
+                    PotentialModul.Clear();
+                    Current = modul.ModulName;
+                    tempChecked.Add(Current);
+                    PotentialModul.Add(Current);
+                    foreach (var Column in Groups[GroupNumber].ConnectionMatrix[Current])
+                    {
+                        if(Groups[GroupNumber].ConnectionMatrix[Current][Column.Key]==true&&
+                            Groups[GroupNumber].ConnectionMatrix[Column.Key][Current] == true)
+                        {
+                            PotentialModul.Add(Column.Key);
+                            CreateModul(GroupNumber, PotentialModul);
+                            CleanConnectionMatrix(GroupNumber, PotentialModul);
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
             private bool ModulInChecked(List<String> tempChecked,Modul modul)
             {
                 foreach(String CheckItemn in tempChecked) {

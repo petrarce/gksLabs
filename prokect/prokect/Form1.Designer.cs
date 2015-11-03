@@ -36,6 +36,7 @@
             this.GridMatrix = new System.Windows.Forms.DataGridView();
             this.GridGroups = new System.Windows.Forms.DataGridView();
             this.GridNewGroups = new System.Windows.Forms.DataGridView();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridGroups)).BeginInit();
@@ -65,9 +66,9 @@
             // 
             // SolveBut
             // 
-            this.SolveBut.Location = new System.Drawing.Point(310, 634);
+            this.SolveBut.Location = new System.Drawing.Point(258, 17);
             this.SolveBut.Name = "SolveBut";
-            this.SolveBut.Size = new System.Drawing.Size(75, 23);
+            this.SolveBut.Size = new System.Drawing.Size(714, 33);
             this.SolveBut.TabIndex = 5;
             this.SolveBut.Text = "Solve";
             this.SolveBut.UseVisualStyleBackColor = true;
@@ -83,36 +84,46 @@
             // GridMatrix
             // 
             this.GridMatrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridMatrix.Location = new System.Drawing.Point(310, 56);
+            this.GridMatrix.Location = new System.Drawing.Point(258, 56);
             this.GridMatrix.Name = "GridMatrix";
             this.GridMatrix.ReadOnly = true;
-            this.GridMatrix.Size = new System.Drawing.Size(372, 250);
+            this.GridMatrix.Size = new System.Drawing.Size(234, 153);
             this.GridMatrix.TabIndex = 6;
             // 
             // GridGroups
             // 
             this.GridGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridGroups.Location = new System.Drawing.Point(741, 56);
+            this.GridGroups.Location = new System.Drawing.Point(498, 56);
             this.GridGroups.Name = "GridGroups";
             this.GridGroups.ReadOnly = true;
-            this.GridGroups.Size = new System.Drawing.Size(372, 250);
+            this.GridGroups.Size = new System.Drawing.Size(234, 153);
             this.GridGroups.TabIndex = 6;
             // 
             // GridNewGroups
             // 
             this.GridNewGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridNewGroups.Location = new System.Drawing.Point(310, 365);
+            this.GridNewGroups.Location = new System.Drawing.Point(738, 56);
             this.GridNewGroups.Name = "GridNewGroups";
             this.GridNewGroups.ReadOnly = true;
-            this.GridNewGroups.Size = new System.Drawing.Size(372, 249);
+            this.GridNewGroups.Size = new System.Drawing.Size(234, 153);
             this.GridNewGroups.TabIndex = 6;
+            // 
+            // elementHost1
+            // 
+            this.elementHost1.Location = new System.Drawing.Point(258, 215);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(707, 368);
+            this.elementHost1.TabIndex = 7;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = null;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1204, 753);
+            this.ClientSize = new System.Drawing.Size(977, 600);
+            this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.GridGroups);
             this.Controls.Add(this.GridNewGroups);
             this.Controls.Add(this.SolveBut);
@@ -178,6 +189,7 @@
         private System.Windows.Forms.DataGridView GridGroups;
         private System.Windows.Forms.DataGridView GridNewGroups;
         private System.Windows.Forms.DataGridView GridMatrix;
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
 
     }
 }
