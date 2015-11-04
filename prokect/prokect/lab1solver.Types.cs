@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GraphX.PCL.Common.Enums;
+using GraphX.PCL.Logic.Algorithms.OverlapRemoval;
+using GraphX.PCL.Logic.Models;
+using GraphX.Controls;
+using QuickGraph;
+using WindowsFormsProject;
 
 namespace ConsoleApplication1
 {
@@ -109,7 +115,14 @@ namespace ConsoleApplication1
             public Matrix() : base() {
                 rowWeight = new Dictionary<string, short>();
                 columnWeight = new Dictionary<string, short>();
-            }                
+            }
+
+
         }
+        public class GraphExample : BidirectionalGraph<DataVertex, DataEdge> { }
+
+        public class GraphAreaExample : GraphArea<DataVertex, DataEdge, BidirectionalGraph<DataVertex, DataEdge>> { }
+
+
         
 }

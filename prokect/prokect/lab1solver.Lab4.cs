@@ -78,6 +78,10 @@ namespace ConsoleApplication1
             GetComunicationMatrix(GroupNumber);
             while(GetNewModul(GroupNumber)) { }
         }
+        public bool GetNewModul1(Int16 GroupNumber)
+        {
+            return GetNewModul(GroupNumber);
+        }
         private bool GetNewModul(Int16 GroupNumber)
             {
                 FindWeight(GroupNumber);
