@@ -14,7 +14,6 @@ using GraphX.PCL.Logic.Algorithms.OverlapRemoval;
 using GraphX.PCL.Logic.Models;
 using GraphX.Controls;
 using QuickGraph;
-using WindowsFormsProject;
 using System.Windows;
 
 namespace Lab1_form_1_
@@ -25,90 +24,12 @@ namespace Lab1_form_1_
         {
             InitializeComponent();
             InitializeComponent_user();
-            Load += Form1_Load;
         }
 
 
-        private ZoomControl _zoomctrl;
-        private GraphAreaExample _gArea;
-
-        private UIElement GenerateWpfVisuals()
-        {
-            _zoomctrl = new ZoomControl();
-            ZoomControl.SetViewFinderVisibility(_zoomctrl, Visibility.Visible);
-            /* ENABLES WINFORMS HOSTING MODE --- >*/
-            var logic = new GXLogicCore<DataVertex, DataEdge, BidirectionalGraph<DataVertex, DataEdge>>();
-            _gArea = new GraphAreaExample() { EnableWinFormsHostingMode = true, LogicCore = logic };
-            logic.Graph = GenerateGraph();
-            logic.DefaultLayoutAlgorithm = LayoutAlgorithmTypeEnum.LinLog;
-            logic.DefaultLayoutAlgorithmParams = logic.AlgorithmFactory.CreateLayoutParameters(LayoutAlgorithmTypeEnum.LinLog);
-            //((LinLogLayoutParameters)logic.DefaultLayoutAlgorithmParams). = 100;
-            logic.DefaultOverlapRemovalAlgorithm = OverlapRemovalAlgorithmTypeEnum.FSA;
-            logic.DefaultOverlapRemovalAlgorithmParams = logic.AlgorithmFactory.CreateOverlapRemovalParameters(OverlapRemovalAlgorithmTypeEnum.FSA);
-            ((OverlapRemovalParameters)logic.DefaultOverlapRemovalAlgorithmParams).HorizontalGap = 50;
-            ((OverlapRemovalParameters)logic.DefaultOverlapRemovalAlgorithmParams).VerticalGap = 50;
-            logic.DefaultEdgeRoutingAlgorithm = EdgeRoutingAlgorithmTypeEnum.None;
-            logic.AsyncAlgorithmCompute = false;
-            _zoomctrl.Content = _gArea;
-            _gArea.RelayoutFinished += gArea_RelayoutFinished;
 
 
-            var myResourceDictionary = new ResourceDictionary { Source = new Uri("Templates\\template.xaml", UriKind.Relative) };
-            _zoomctrl.Resources.MergedDictionaries.Add(myResourceDictionary);
 
-            return _zoomctrl;
-        }
-
-        void gArea_RelayoutFinished(object sender, EventArgs e)
-        {
-            _zoomctrl.ZoomToFill();
-        }
-
-        private GraphExample GenerateGraph()
-        {
-            String _tmprStr;
-
-            //FOR DETAILED EXPLANATION please see SimpleGraph example project
-            var dataGraph = new GraphExample();
-            foreach(Modul modul in mainLabSolver.Groups[0].Moduls)
-            {
-                _tmprStr = "";
-                foreach (String str in modul.Operations)
-                {
-                    if (str != modul.Operations[0])
-                        _tmprStr += ", ";
-                    _tmprStr += str;
-                }
-                var dataVertex = new DataVertex(_tmprStr);
-                dataGraph.AddVertex(dataVertex);
-            }
-            DataEdge dataEdge;
-            var vlist = dataGraph.Vertices.ToList();
-            //Then create two edges optionaly defining Text property to show who are connected
-            foreach (var Row in mainLabSolver.Groups[0].ConnectionMatrix)
-            {
-                foreach(var Column in Row.Value)
-                {
-                    if (Column.Value)
-                    {
-                        dataEdge = new DataEdge(
-                            vlist.Find(x => x.Text == Row.Key),
-                            vlist.Find(x => x.Text == Column.Key))
-                            {
-                                Text = string.Format("{0} -> {1}",
-                                vlist.Find(x => x.Text.Contains(Row.Key)),
-                                vlist.Find(x => x.Text.Contains(Column.Key)))
-                            };
-                        dataGraph.AddEdge(dataEdge);
-                    }
-                        
-                }
-            }
-
-            //dataEdge = new DataEdge(vlist[2], vlist[2]) { Text = string.Format("{0} -> {1}", vlist[2], vlist[2]) };
-            //dataGraph.AddEdge(dataEdge);
-            return dataGraph;
-        }
 
 
         private void TextEntered(object sender, EventArgs e)
@@ -205,19 +126,5 @@ namespace Lab1_form_1_
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*if (!mainLabSolver.GetNewModul1(0))
-            {
-                System.Windows.Forms.MessageBox.Show("Graph is already done");
-                return;
-            }*/
-            elementHost1.Child = GenerateWpfVisuals();
-            _zoomctrl.ZoomToFill();
-            _gArea.GenerateGraph(true);
-            _gArea.SetVerticesDrag(true, true);
-            _zoomctrl.ZoomToFill();
-
-        }
     }
 }

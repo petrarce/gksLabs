@@ -70,8 +70,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataEdge.cs" />
-    <Compile Include="DataVertex.cs" />
     <Compile Include="Exeptions.cs" />
     <Compile Include="Form1.Checks.cs">
       <SubType>Form</SubType>

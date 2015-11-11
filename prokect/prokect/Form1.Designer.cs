@@ -36,8 +36,6 @@
             this.GridMatrix = new System.Windows.Forms.DataGridView();
             this.GridGroups = new System.Windows.Forms.DataGridView();
             this.GridNewGroups = new System.Windows.Forms.DataGridView();
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridGroups)).BeginInit();
@@ -109,37 +107,12 @@
             this.GridNewGroups.Size = new System.Drawing.Size(234, 153);
             this.GridNewGroups.TabIndex = 6;
             // 
-            // elementHost1
-            // 
-            this.elementHost1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.elementHost1.BackColor = System.Drawing.Color.White;
-            this.elementHost1.Location = new System.Drawing.Point(258, 215);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(714, 348);
-            this.elementHost1.TabIndex = 0;
-            this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = null;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(258, 565);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(234, 33);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Rfresh";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(977, 600);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.GridGroups);
             this.Controls.Add(this.GridNewGroups);
             this.Controls.Add(this.SolveBut);
@@ -205,8 +178,6 @@
         private System.Windows.Forms.DataGridView GridGroups;
         private System.Windows.Forms.DataGridView GridNewGroups;
         private System.Windows.Forms.DataGridView GridMatrix;
-        private System.Windows.Forms.Integration.ElementHost elementHost1;
-        private System.Windows.Forms.Button button1;
 
     }
 }

@@ -8,7 +8,6 @@ using GraphX.PCL.Logic.Algorithms.OverlapRemoval;
 using GraphX.PCL.Logic.Models;
 using GraphX.Controls;
 using QuickGraph;
-using WindowsFormsProject;
 
 namespace ConsoleApplication1
 {
@@ -119,10 +118,6 @@ namespace ConsoleApplication1
 
 
         }
-        public class GraphExample : BidirectionalGraph<DataVertex, DataEdge> { }
-
-        public class GraphAreaExample : GraphArea<DataVertex, DataEdge, BidirectionalGraph<DataVertex, DataEdge>> { }
-
 
         
 }
