@@ -36,10 +36,14 @@
             this.GridMatrix = new System.Windows.Forms.DataGridView();
             this.GridGroups = new System.Windows.Forms.DataGridView();
             this.GridNewGroups = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridGroups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridNewGroups)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // addStr
@@ -107,12 +111,41 @@
             this.GridNewGroups.Size = new System.Drawing.Size(234, 153);
             this.GridNewGroups.TabIndex = 6;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(258, 215);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(234, 153);
+            this.dataGridView1.TabIndex = 7;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(498, 215);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 8;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(498, 241);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "GetMatrix";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(977, 600);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.GridGroups);
             this.Controls.Add(this.GridNewGroups);
             this.Controls.Add(this.SolveBut);
@@ -127,7 +160,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridMatrix)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridGroups)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridNewGroups)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -178,6 +213,9 @@
         private System.Windows.Forms.DataGridView GridGroups;
         private System.Windows.Forms.DataGridView GridNewGroups;
         private System.Windows.Forms.DataGridView GridMatrix;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DataGridView dataGridView1;
 
     }
 }

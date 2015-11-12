@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace ConsoleApplication1
 {
+    internal static class Variables 
+    {
+        static bool before = true;
+        static bool after = false;
+        public static bool BEFORE { get { return before; } }
+        public static bool AFTER { get { return after; } }
+    }
     partial class lab1Solver
     {
         public void StartLab4Task()
@@ -85,9 +91,11 @@ namespace ConsoleApplication1
         private bool GetNewModul(Int16 GroupNumber)
             {
                 FindWeight(GroupNumber);
+                if (CheckMutual(GroupNumber))
+                    return true;
                 if(CheckChain(GroupNumber))
                     return true;
-                if (CheckMutual(GroupNumber))
+                if (CheckRoundChain(GroupNumber))
                     return true;
                 return false;
             }
@@ -107,20 +115,25 @@ namespace ConsoleApplication1
                         continue;
                     }
                     PotentialModul.Add(FindPrev(Current, GroupNumber));
+                    if (PotentialModulOperationsCount(GroupNumber, PotentialModul) > 5)
+                        return false;
                     while (RowAndColWeight(1, 1, GroupNumber, Current))
                     {
                         PotentialModul.Add(Current);
-                        Current = FindNext(Current, GroupNumber);
+                        if (PotentialModulOperationsCount(GroupNumber, PotentialModul) > 5)
+                            return false;
+                        Current = FindNext(Current, GroupNumber, tempChecked);
                         tempChecked.Add(Current);
                         
                     }
                     PotentialModul.Add(Current);
+                    if (PotentialModulOperationsCount(GroupNumber, PotentialModul) > 5)
+                        return false;
                     if(RowAndColWeight(1, 0, GroupNumber, Current))//!!!
                     {
                         continue;
                     }
-                    if(Groups[GroupNumber].ConnectionMatrix[PotentialModul[0]][Current] == true ||
-                        Groups[GroupNumber].ConnectionMatrix[Current][PotentialModul[0]] == true)
+                    if(Groups[GroupNumber].ConnectionMatrix[PotentialModul[0]][Current] == true)
                     {
                         CreateModul(GroupNumber,PotentialModul);
                         CleanConnectionMatrix(GroupNumber, PotentialModul);
@@ -130,10 +143,12 @@ namespace ConsoleApplication1
                 }
                 return false;
             }
-                private String FindNext(String Current,Int16 GroupNumber) 
+                private String FindNext(String Current,Int16 GroupNumber,List<String> Checked) 
                 {
+                    Modul tempModul=new Modul();
                     foreach(var Element in Groups[GroupNumber].ConnectionMatrix[Current]) {
-                        if(Element.Value == true)
+                        tempModul.ModulName=Element.Key;
+                        if (Element.Value == true && !ModulInChecked(Checked,tempModul))
                             return Element.Key;
                     }
                     return "";
@@ -215,12 +230,16 @@ namespace ConsoleApplication1
                     Current = modul.ModulName;
                     tempChecked.Add(Current);
                     PotentialModul.Add(Current);
+                    if (PotentialModulOperationsCount(GroupNumber, PotentialModul) > 5)
+                        return false;
                     foreach (var Column in Groups[GroupNumber].ConnectionMatrix[Current])
                     {
                         if(Groups[GroupNumber].ConnectionMatrix[Current][Column.Key]==true&&
                             Groups[GroupNumber].ConnectionMatrix[Column.Key][Current] == true)
                         {
                             PotentialModul.Add(Column.Key);
+                            if (PotentialModulOperationsCount(GroupNumber, PotentialModul) > 5)
+                                return false;
                             CreateModul(GroupNumber, PotentialModul);
                             CleanConnectionMatrix(GroupNumber, PotentialModul);
                             return true;
@@ -229,6 +248,80 @@ namespace ConsoleApplication1
                 }
                 return false;
             }
+            private bool CheckRoundChain(Int16 GroupNumber)
+            {
+                List<String> tempChecked = new List<string>();
+                List<String> PotentialModul=new List<string>();
+                Modul tempModul = new Modul();
+                String tempStr;
+                foreach (var Operation in groups[GroupNumber].ConnectionMatrix.Keys)
+                {
+                    tempModul.ModulName = Operation;
+                    if (ModulInChecked(tempChecked, tempModul)||(tempStr=FindNext(Operation, GroupNumber,tempChecked))=="")
+                        continue;
+                    if (FindWay(tempStr,ref PotentialModul,ref tempChecked,GroupNumber))
+                        return true;
+                }
+                return false;
+            }
+                private bool FindWay(String Current, ref List<String> PotentialModul, ref List<String> Checked,Int16 GroupNumber)
+                {
+                    Modul tempModul=new Modul(){ModulName=Current};
+                    String tempStr;
+                    Checked.Add(Current);
+                    if (ModulInChecked(PotentialModul, tempModul))
+                    {
+                        RefreshPotentialModul(ref PotentialModul, Current,Variables.BEFORE);
+                        CreateModul(GroupNumber, PotentialModul);
+                        CleanConnectionMatrix(GroupNumber, PotentialModul);
+                        return true;
+                    }
+                    PotentialModul.Add(Current);
+                    if (PotentialModulOperationsCount(GroupNumber, PotentialModul) > 5)
+                        return false;
+                    while ((tempStr = FindNext(Current, GroupNumber,Checked)) != "")
+                    {
+                        if (FindWay(tempStr, ref PotentialModul, ref Checked, GroupNumber))
+                            return true;
+                    }
+                    PotentialModul.Remove(Current);
+                    return false;
+                }
+                    private void RefreshPotentialModul(ref List<String> PotentialModul,String ModulName,bool Before)
+                    {
+                        if (Before)
+                            RefreshBefore(ref PotentialModul,ModulName);
+                        else 
+                            RefreshAfter(ref PotentialModul,ModulName);
+                    }
+                        private void RefreshBefore(ref List<String> PotentialModul, String ModulName)
+                        {
+                            foreach(var Value in PotentialModul)
+                            {
+                                if (Value == ModulName)
+                                {
+                                    PotentialModul.RemoveRange(0, PotentialModul.FindIndex(x => x == ModulName));
+                                    return;
+
+                                }
+                            }
+
+                        }
+                        private void RefreshAfter(ref List<String> PotentialModul, String ModulName)
+                        {
+                            foreach (var Value in PotentialModul)
+                            {
+                                if (Value == ModulName)
+                                {
+                                    PotentialModul.RemoveRange(PotentialModul.FindIndex(x => x == Value), PotentialModul.Count - PotentialModul.FindIndex(x => x == Value));
+                                    return;
+                                }
+                            }
+                        }
+
+
+
+
             private bool ModulInChecked(List<String> tempChecked,Modul modul)
             {
                 foreach(String CheckItemn in tempChecked) {
@@ -247,5 +340,24 @@ namespace ConsoleApplication1
             {
                 return Groups[GroupNumber].ConnectionMatrix.RowWeight[Current] == value1 && Groups[GroupNumber].ConnectionMatrix.ColumnWeight[Current] == value2; 
             }
-    }   
+            private Int16 PotentialModulOperationsCount(Int16 GroupNumber, List<String> PotentialModul)
+            {
+                Int16 count=0;
+                Modul tempModul = new Modul();
+                foreach (var str in PotentialModul)
+                {
+                    foreach (var modul in Groups[GroupNumber].Moduls)
+                    {
+                        if (modul.ModulName == str)
+                        {
+                            tempModul = modul;
+                            break;
+                        }
+                    }
+                    count += (Int16)tempModul.Operations.Count;
+                }
+                return count;
+
+            }
+    }       
 }

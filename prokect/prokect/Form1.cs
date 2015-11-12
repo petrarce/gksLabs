@@ -87,7 +87,6 @@ namespace Lab1_form_1_
             
         }
 
-
         private void getAllInfo() 
         {
             Thread Thread1;
@@ -124,6 +123,12 @@ namespace Lab1_form_1_
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OutConnectionMatrix(ref dataGridView1, Convert.ToInt16(textBox1.Text));
+            dataGridView1.AutoResizeColumns();
         }
 
     }

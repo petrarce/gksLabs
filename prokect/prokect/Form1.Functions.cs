@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ConsoleApplication1;
 using System.Threading;
+using System.Data;
 
 namespace Lab1_form_1_
 {
@@ -48,7 +49,30 @@ namespace Lab1_form_1_
                 }
             }
             Grid.AutoResizeColumns();
-        }        
+        }
+        private void OutConnectionMatrix(ref DataGridView Grid,Matrix Matrix)
+        {
+            Grid.ColumnCount = Grid.RowCount = Matrix.Values.Count;
+            int i=0,j=0;
+            foreach (var row in Matrix)
+            {
+                j=0;
+                foreach (var Value in row.Value.Values)
+                {
+                    Grid.Rows[i].HeaderCell.Value = row.Key;
+                    Grid.Columns[i].HeaderCell.Value = row.Key;
+                    Grid.Rows[i].Cells[j].Value = Value.ToString();
+                    j++;
+                    
+                }
+                i++;
+            }
+
+        }
+        private void OutConnectionMatrix(ref DataGridView Grid, Int16 GroupNumber)
+        {
+            OutConnectionMatrix(ref Grid, mainLabSolver.Groups[GroupNumber].ConnectionMatrix);
+        }
         private void GetGroupsFunction(){
             mainLabSolver.createGroups();
             WaitForThread.Set();
