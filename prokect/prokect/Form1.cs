@@ -9,10 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ConsoleApplication1;
 using System.Threading;
-using GraphX.PCL.Common.Enums;
-using GraphX.PCL.Logic.Algorithms.OverlapRemoval;
-using GraphX.PCL.Logic.Models;
-using GraphX.Controls;
 using QuickGraph;
 using System.Windows;
 

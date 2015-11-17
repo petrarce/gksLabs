@@ -37,6 +37,7 @@ namespace ConsoleApplication1
             }
             private void FindAllOperationsInGroup(Int16 i)
             {
+                groups[i].Operations = new List<string>();//CHANGED
                 for(Int16 j=0;j<groups[i].Elements.Count;j++) {
                     for (Int16 k = 0; k < operList[groups[i].Elements[j]].Length; k++)
                         groups[i].Operations.Add(operList[groups[i].Elements[j]][k]);
@@ -64,7 +65,8 @@ namespace ConsoleApplication1
             #endregion 
 
 
-        private void GetNewGroupsLocal() { 
+        private void GetNewGroupsLocal() 
+        { 
             for(Int16 i=0;i<groups.Count;i++){
                 SortGroups(i);
                 RefreshGroup(i);
