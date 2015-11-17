@@ -124,6 +124,8 @@ namespace Lab1_form_1_
         private void button1_Click(object sender, EventArgs e)
         {
             OutConnectionMatrix(ref dataGridView1, Convert.ToInt16(textBox1.Text));
+            OutModul(ref dataGridView2, Convert.ToInt16(textBox1.Text));
+            dataGridView2.AutoResizeColumns();
             dataGridView1.AutoResizeColumns();
         }
 

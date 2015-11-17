@@ -102,7 +102,7 @@ namespace ConsoleApplication1
             //Checking for chain existing
             private bool CheckChain(Int16 GroupNumber)
             {
-                String Current;
+                String Current,tempStr;
                 List<String> PotentialModul=new List<String>();
                 List<String> tempChecked = new List<String>();//Names of checked moduls
                 foreach(Modul modul in Groups[GroupNumber].Moduls) {
@@ -117,12 +117,14 @@ namespace ConsoleApplication1
                     PotentialModul.Add(FindPrev(Current, GroupNumber));
                     if (PotentialModulOperationsCount(GroupNumber, PotentialModul) > 5)
                         return false;
-                    while (RowAndColWeight(1, 1, GroupNumber, Current))
+                    tempStr = Current;
+                    while (tempStr!= "")//||RowAndColWeight(1, 1, GroupNumber, Current))
                     {
+                        Current = tempStr;
                         PotentialModul.Add(Current);
                         if (PotentialModulOperationsCount(GroupNumber, PotentialModul) > 5)
                             return false;
-                        Current = FindNext(Current, GroupNumber, tempChecked);
+                        tempStr = FindNext(Current, GroupNumber, tempChecked);
                         tempChecked.Add(Current);
                         
                     }

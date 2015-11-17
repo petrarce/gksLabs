@@ -73,6 +73,25 @@ namespace Lab1_form_1_
         {
             OutConnectionMatrix(ref Grid, mainLabSolver.Groups[GroupNumber].ConnectionMatrix);
         }
+        private void OutModul(ref DataGridView Grid, Int16 GroupNumber)
+        {
+            int i = 0;
+            String Str="";
+            Grid.RowCount = mainLabSolver.Groups[GroupNumber].Moduls.Count;
+            Grid.ColumnCount = 1;
+            Grid.Columns[0].HeaderText = "Operations";
+            foreach (var modul in mainLabSolver.Groups[GroupNumber].Moduls)
+            {
+                Str = "";
+                foreach (var operation in modul.Operations)
+                {
+                    Str += operation.ToString()+" ;";
+                }
+                Grid.Rows[i].Cells[0].Value = Str;
+                Grid.Rows[i].HeaderCell.Value = modul.ModulName;
+                i++;
+            }
+        }
         private void GetGroupsFunction(){
             mainLabSolver.createGroups();
             WaitForThread.Set();

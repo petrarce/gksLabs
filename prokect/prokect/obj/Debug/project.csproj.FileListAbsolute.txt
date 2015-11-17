@@ -25,16 +25,10 @@ K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\project.csprojResolveA
 K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\prokect.Form1.resources
 K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\prokect.Properties.Resources.resources
 K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\obj\Debug\project.csproj.GenerateResource.Cache
-K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\GraphX.Controls.dll
-K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\GraphX.PCL.Common.dll
-K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\GraphX.PCL.Logic.dll
 K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\QuickGraph.Data.dll
 K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\QuickGraph.dll
 K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\QuickGraph.Graphviz.dll
 K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\QuickGraph.Serialization.dll
-K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\GraphX.Controls.pdb
-K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\GraphX.PCL.Common.pdb
-K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\GraphX.PCL.Logic.pdb
 K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\QuickGraph.xml
 K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\QuickGraph.Data.xml
 K:\GKS\labs\lab1\form\Lab1_form\prokect\prokect\bin\Debug\QuickGraph.Graphviz.xml
