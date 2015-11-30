@@ -176,17 +176,18 @@ namespace ConsoleApplication1
                 }
                 private void AddRowsAndColumns(List<String> PotentialModul, String DeletingModul, Int16 GroupNumber)
                     {
-                        foreach (var Element in PotentialModul)
+                        foreach (var Element in Groups[GroupNumber].Moduls)
                         {
-                            if (Element == PotentialModul[0])
+                            if (Element.ModulName == PotentialModul[0])
                                 continue;
-                            if (Groups[GroupNumber].ConnectionMatrix[DeletingModul][Element] == true)
-                                Groups[GroupNumber].ConnectionMatrix[PotentialModul[0]][Element] = true;
-                            if (Groups[GroupNumber].ConnectionMatrix[Element][DeletingModul] == true)
-                                Groups[GroupNumber].ConnectionMatrix[Element][PotentialModul[0]] = true;
+                            if (Groups[GroupNumber].ConnectionMatrix[DeletingModul][Element.ModulName] == true)
+                                Groups[GroupNumber].ConnectionMatrix[PotentialModul[0]][Element.ModulName] = true;
+                            if (Groups[GroupNumber].ConnectionMatrix[Element.ModulName][DeletingModul] == true)
+                                Groups[GroupNumber].ConnectionMatrix[Element.ModulName][PotentialModul[0]] = true;
                         }
                         Groups[GroupNumber].ConnectionMatrix[PotentialModul[0]][PotentialModul[0]] = false;
                     }
+                    //the function delets a modul, which was absorbed be current function
                     private void DeleteModuls(List<String> PotentialModul,Int16 GroupNumber){
                         Modul modul= new Modul(), firstModul=new Modul();
                         foreach (var mod in Groups[GroupNumber].Moduls) {
@@ -201,8 +202,11 @@ namespace ConsoleApplication1
                                 if (mod.ModulName == Element)
                                     modul = mod;
                             }
-                            Groups[GroupNumber].Moduls[Groups[GroupNumber].Moduls.FindIndex(x => x.Equals(firstModul))].Operations.AddRange(
-                                    Groups[GroupNumber].Moduls[Groups[GroupNumber].Moduls.FindIndex(x => x.Equals(modul))].Operations);
+                            int firstModulIndex = Groups[GroupNumber].Moduls.FindIndex(x => x.Equals(firstModul));//
+                            int modulIndex = Groups[GroupNumber].Moduls.FindIndex(x => x.Equals(modul));
+                            if (modulIndex < 0 || firstModulIndex < 0)
+                                continue;
+                            Groups[GroupNumber].Moduls[firstModulIndex].Operations.AddRange(Groups[GroupNumber].Moduls[modulIndex].Operations);//////????Index out of range
                             Groups[GroupNumber].Moduls.Remove(modul);
                         }                   
                     }
